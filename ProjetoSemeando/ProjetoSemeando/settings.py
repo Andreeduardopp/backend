@@ -92,7 +92,7 @@ WSGI_APPLICATION = 'ProjetoSemeando.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'postgres',
+        'NAME': 'ProjetoDev',
         'USER': 'postgres',
         'PASSWORD': 'Andre-eduard0',
         'HOST': 'localhost',
@@ -148,6 +148,9 @@ REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ],
+     'DEFAULT_PERMISSION_CLASSES': [
+        'utils.permission.CustomDjangoModelPermissions',
+    ]
 }
 
 SWAGGER_SETTINGS = {
@@ -160,6 +163,8 @@ SWAGGER_SETTINGS = {
     }
 }
 
+AUTH_USER_MODEL = 'Usuarios.User'
+
 SITE_ID = 1
 
 REST_AUTH = {
@@ -167,7 +172,18 @@ REST_AUTH = {
     'JWT_AUTH_HTTPONLY': False,
 }
 
-EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+ACCOUNT_AUTHENTICATION_METHOD = "username_email"
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587 
+EMAIL_USE_TLS = True  
+EMAIL_HOST_USER = 'patowaves@gmail.com'  # Seu endereço de email
+EMAIL_HOST_PASSWORD = 'aqoimpxvvhfatced'  # Sua senha de email
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
+ACCOUNT_EMAIL_VERIFICATION_EXPIRE_DAYS = 7
+
 CORS_ALLOW_ALL_ORIGINS = True
+
+ACCOUNT_ADAPTER = 'Usuarios.adapter.CustomAccountAdapter'
+URL_FRONTEND = config('URL_FRONTEND', default='http://localhost:4200')

@@ -1,3 +1,15 @@
+from django.core.exceptions import ValidationError
+
+
+def valida_telefone(phone_number):
+    """
+    Validação de número de celular simples.
+    """
+    if len(phone_number) < 10:
+        raise ValidationError('Número de celular muito curto')
+    elif len(phone_number) > 15:
+        raise ValidationError('Número de celular muito longo')
+
 
 def _retorna_digitos(texto):
     if not texto or not isinstance(texto, str):
