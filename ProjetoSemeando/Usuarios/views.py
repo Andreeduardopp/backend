@@ -9,25 +9,11 @@ class UserWriteSerializer(serializers.ModelSerializer):
         exclude = ['password', 'is_superuser', 'is_staff','is_active','date_joined','user_permissions','groups','last_login']
 
 class UserReadSerializer(serializers.ModelSerializer):
-    groups = serializers.SerializerMethodField()
-    user_permissions = serializers.SerializerMethodField()
-
+    # eventos = EventoSerializer(many=True, read_only=True, source='eventos_set')
     class Meta:
         model = User
-        exclude = ['password', 'is_superuser', 'is_staff']
+        exclude = ['password', 'is_superuser', 'is_staff','is_active','user_permissions','groups',]
 
-    def get_groups(self, instance):
-        group_names = []
-        for group in instance.groups.all():
-            group_names.append(group.name)
-        return group_names
-    
-    def get_user_permissions(self, instance):
-        # percorremos todas as permissões da instância e montamos uma lista com os nomes para retornar no lugar dos códigos
-        perms_names = []
-        for perm in instance.user_permissions.all():
-            perms_names.append(perm.codename)
-        return perms_names
 
 
 class UserView(viewsets.ModelViewSet):

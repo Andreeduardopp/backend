@@ -11,6 +11,7 @@ class Evento(models.Model):
     titulo = models.CharField(max_length=255)
     user = models.ForeignKey(User, related_name='eventos', on_delete=models.CASCADE, null=True, blank=True)
     data = models.DateField()
+    hora_inicio = models.TimeField(null=True, blank=True) 
     descricao = models.TextField()
     valor_entrada = models.DecimalField(max_digits=10, decimal_places=2)
     data_postagem = models.DateField(auto_now_add=True , null=True, blank=True)
