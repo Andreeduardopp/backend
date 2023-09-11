@@ -16,7 +16,7 @@ class OrganizadorSerializer(serializers.ModelSerializer):
         fields = ('id', 'first_name', 'last_name')
 
 class CustomPagination(PageNumberPagination):
-    page_size = 5
+    page_size = 10
     page_size_query_param = 'page_size'
     max_page_size = 100
 class CategoriaSerializer(serializers.ModelSerializer):
