@@ -26,6 +26,7 @@ class CategoriaSerializer(serializers.ModelSerializer):
         fields = ('id', 'nome')
 
 class EventoReadSerializer(serializers.ModelSerializer):
+    hora_inicio = serializers.TimeField(format='%H:%M')
     foto_principal = serializers.ImageField(max_length=None, use_url=True, required=False)
     user = OrganizadorSerializer(read_only=True)
     categoria = serializers.SlugRelatedField(
